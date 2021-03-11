@@ -1,0 +1,17 @@
+Burbujeo:
+El método de burbujeo es el más simple para ordenar elementos. Lo que hace este método es comparar cada elemento
+del conjunto con el siguiente, y darlos vuelta en el caso de que el próximo sea menor. Esto lo hace hasta que
+encuentre que ninguno es mayor al siguiente, por lo tanto, en el peor de los casos, es de orden n^2 y es usualmente
+el más lento de todos
+
+Selección:
+El método de selección consiste en encontrar el menor de los elementos del conjunto, y ponerlo primero. Luego, lo
+hace de vuelta para el segundo menor, y así hasta que los elementos estén ordenados. Este tambien es de orden n^2,
+pero suele tardar menos que el método de burbujeo.
+
+Inserción:
+El método de inserción consiste en agarrar un elemento del conjunto y compararlo con lo anteriores, y ponerlo en su
+posición con respecto a los anteriores. Este tambien es de orden n^2
+
+Ninguno de los 3 requiere una pre-condición ni postcondición
+El dominio es un conjunto desordenado, y el codominio uno ordenado
