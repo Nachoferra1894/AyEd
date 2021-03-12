@@ -3,6 +3,7 @@ package Ejercicio3;
 class MergeTwoSorted{
 
     public static void mergeArrays(int[] arr1, int[] arr2, int n1, int n2, int[] arr3) { //Done for ints and not as specified in the task
+        //Check MergeSequence class for actual result.
         int i = 0, j = 0, k = 0;
         while (i<n1 && j <n2)
         {

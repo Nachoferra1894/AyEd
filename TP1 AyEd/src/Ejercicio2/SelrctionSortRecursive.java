@@ -1,7 +1,4 @@
-package Ej2;
-
-import java.util.Arrays;
-import java.util.Random;
+package Ejercicio2;
 
 public class SelrctionSortRecursive<T extends Comparable<? super T>> {
 /* Not fully working

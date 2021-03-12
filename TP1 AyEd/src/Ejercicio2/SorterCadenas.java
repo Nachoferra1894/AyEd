@@ -1,4 +1,4 @@
-package Ej2;
+package Ejercicio2;
 
 public class SorterCadenas {
 
