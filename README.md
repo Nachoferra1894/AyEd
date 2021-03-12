@@ -2,4 +2,6 @@
 
 ALGORITMOS Y ESTRUCTURAS DE DATOS:
 
-En este git se encuentran todos los trabajos
+Grupo 14 Integrantes: Ignacio Ferrari, Ignacio Mendez, Agustin Tittoto, Ignacio Estevo
+
+TP 1 Comparacion de Algoritmos (En Progreso)
