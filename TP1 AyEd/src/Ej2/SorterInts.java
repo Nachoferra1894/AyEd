@@ -36,7 +36,7 @@ public class SorterInts {
                     minIndex = i; // Busco el menor de todos los que estan para adelante
                 }
             }
-            if (minIndex != currentIndex)
+            if (!minIndex.equals(currentIndex))
             {
                 Integer temp = array[currentIndex];
                 array[currentIndex] = array[minIndex];  // Si el menor es distIntegero del que estoy usando, los cambio

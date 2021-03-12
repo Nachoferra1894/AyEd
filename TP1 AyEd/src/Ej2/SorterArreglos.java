@@ -2,7 +2,6 @@ package Ej2;
 
 public class SorterArreglos<T extends Comparable<? super T>> {
 
-
     SorterArreglos() { }
 
     public T[] bubbleSort(T[] array) {
