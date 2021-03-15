@@ -1,6 +1,6 @@
 package Ejercicio2;
 
-public class SelrctionSortRecursive<T extends Comparable<? super T>> {
+public class SelectionSortRecursive<T extends Comparable<? super T>> {
 /* Not fully working
     public void selectionSort(T[] arrToSort, int n) { recurSelectionSort(arrToSort, n, 0);}
 
@@ -33,8 +33,8 @@ public class SelrctionSortRecursive<T extends Comparable<? super T>> {
         return minIndex;
     }
     public static void main(String[] args) {
-        SelrctionSortRecursive<String> sorterString = new SelrctionSortRecursive<String>();
-        SelrctionSortRecursive<Integer> sorterInt = new SelrctionSortRecursive<Integer>();
+        SelectionSortRecursive<String> sorterString = new SelectionSortRecursive<String>();
+        SelectionSortRecursive<Integer> sorterInt = new SelectionSortRecursive<Integer>();
 
         Integer[] toSortInt = new Integer[300]; //We create a randomized Integer array of size 300
         Random r = new Random();

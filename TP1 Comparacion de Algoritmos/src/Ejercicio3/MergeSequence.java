@@ -1,13 +1,13 @@
 package Ejercicio3;
 
 import org.apache.commons.lang3.ArrayUtils;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MergeSequence<T extends Comparable<? super T>>  {
     //As we learnt to sort arrays, we could just create a third array and fill it with arr1 and arr2 and then sort the third.
     //Or just use Generic Arraylists
+
+    //We used apache Commons Lang3 library: https://search.maven.org/remotecontent?filepath=org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar
 
     //Solution to given task
     public ArrayList<T> merge(T[] firstSequence, T[] secondSequence) {
@@ -15,19 +15,19 @@ public class MergeSequence<T extends Comparable<? super T>>  {
         ArrayList<T> mergedArrays= new ArrayList<>(); // I couldn't create a generic array, hence the arraylist
 
         int headC = 0;
-        while(headC != newSeqSize) { //Refactor variable names to improve readability
+        while(headC != newSeqSize) {
 
                 if (firstSequence.length != 0 && secondSequence.length != 0) {
-                    int minSecondSequence = minIndex(secondSequence);
-                    int minFirstSequence = minIndex(firstSequence);
+                    int minIndex2 = minIndex(secondSequence);
+                    int minIndex1 = minIndex(firstSequence);
 
-                    T toAdd = minElement(secondSequence[minSecondSequence], firstSequence[minFirstSequence]);
+                    T toAdd = minElement(secondSequence[minIndex2], firstSequence[minIndex1]);
                     mergedArrays.add(toAdd);
 
-                    if (minElement(secondSequence[minSecondSequence], firstSequence[minFirstSequence]).compareTo(secondSequence[minSecondSequence]) == 0) {
-                        secondSequence = ArrayUtils.remove(secondSequence, minSecondSequence); //ArrayUtils.remove comes from the library Apache Commons
+                    if (minElement(secondSequence[minIndex2], firstSequence[minIndex1]).compareTo(secondSequence[minIndex2]) == 0) {
+                        secondSequence = ArrayUtils.remove(secondSequence, minIndex2); //ArrayUtils.remove comes from the library Apache Commons
                     } else {
-                        firstSequence = ArrayUtils.remove(firstSequence, minFirstSequence);
+                        firstSequence = ArrayUtils.remove(firstSequence, minIndex1);
                     }
                 }
                 else if(firstSequence.length == 0){
@@ -43,13 +43,14 @@ public class MergeSequence<T extends Comparable<? super T>>  {
     }
 
 
-    public T minElement(T firstElement, T secondElement){
+    public T minElement(T firstElement, T secondElement){ //Returns the smaller element between two generic ones
 
             if(firstElement.compareTo(secondElement) > 0) {
                 return secondElement;
             } else { return firstElement;}
     }
-    public int minIndex(T[] arr){
+
+    public int minIndex(T[] arr){ //Returns the index of the minimum element of an array
         int minIndex = 0;
 
         for (int i = 1; i < arr.length; i++) {
@@ -58,17 +59,5 @@ public class MergeSequence<T extends Comparable<? super T>>  {
             }
         }
         return minIndex;
-    }
-
-    public static void main(String[] args) {
-        MergeSequence<String> merger = new MergeSequence<>();
-
-        String[] firstSequence = {"apple", "banana", "orange", "peach", "watermelon"};
-        String[] secondSequence = {"blueberry", "cherry", "cucumber","date", "fig"};
-
-
-        System.out.println("The merged sequence is: " + merger.merge(firstSequence,secondSequence));
-
-
     }
 }
