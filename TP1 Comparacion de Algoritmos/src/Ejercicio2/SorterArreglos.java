@@ -1,7 +1,6 @@
-package Ej2;
+package Ejercicio2;
 
 public class SorterArreglos<T extends Comparable<? super T>> {
-
 
     SorterArreglos() { }
 
