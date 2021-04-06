@@ -11,7 +11,7 @@ pero suele tardar menos que el método de burbujeo.
 
 Inserción:
 El método de inserción consiste en agarrar un elemento del conjunto y compararlo con lo anteriores, y ponerlo en su
-posición con respecto a los anteriores. Este tambien es de orden n^2
+posición con respecto Ej13.a los anteriores. Este tambien es de orden n^2
 
 Ninguno de los 3 requiere una pre-condición ni postcondición
 El dominio es un conjunto desordenado, y el codominio uno ordenado
