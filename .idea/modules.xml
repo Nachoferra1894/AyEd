@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Arboles/Arboles.iml" filepath="$PROJECT_DIR$/Arboles/Arboles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AyEd.iml" filepath="$PROJECT_DIR$/.idea/AyEd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Caballo/Caballo.iml" filepath="$PROJECT_DIR$/Caballo/Caballo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Romanos/Romanos.iml" filepath="$PROJECT_DIR$/Romanos/Romanos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TP1 AyEd/TP1 AyEd.iml" filepath="$PROJECT_DIR$/TP1 AyEd/TP1 AyEd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Stack2/untitled.iml" filepath="$PROJECT_DIR$/Stack2/untitled.iml" />
+    </modules>
+  </component>
+</project>
