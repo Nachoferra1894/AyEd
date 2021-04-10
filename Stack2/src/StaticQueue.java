@@ -1,51 +1,40 @@
 import interfaces.QueueInterface;
 
-import java.util.Queue;
-
-public class StaticQueue<T> {
+public class StaticQueue<T> implements QueueInterface<T> {
 
     private T[] array;
     private int front;
     private int back;
     private int size;
+    private int amount;
 
     public StaticQueue(int size) {
         this.size = size;
         front = 0;
         back = 0;
+        amount = 0;
         array = (T[]) new Object[size];
     }
-/*
+
     public void enqueue(T t) {
-        if (back != size) back++;
-        else {
-            if (back < array.length) {
-                array[back]=t;
-                size++;
-            } else {
-                back=0;
-                array[back]=t;
-                size++;
-            }
-
-
-        }
+        increment();
+        amount++;
+        array[back - 1] = t;
     }
 
     public T dequeue() {
         T element = array[front];
         front++;
-        size--;
+        amount--;
         return element;
     }
 
-
     public boolean isEmpty() {
-
+        return (amount != size);
     }
 
     public int length() {
-
+        return amount;
     }
 
     public int size() {
@@ -58,15 +47,11 @@ public class StaticQueue<T> {
         amount = 0;
     }
 
-    private void manage(){
+    private void increment() {
         if (back != size) back++;
         else {
-            if (back < array.length) {
-                array[back]=
-            }
-
+            if (amount < size) back = 0;
             else throw new IllegalStateException("Queue is full.");
         }
     }
-}*/
 }

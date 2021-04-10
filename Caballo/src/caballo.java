@@ -9,22 +9,24 @@ public class caballo<T> {
 
     public caballo(String initialPosition){
         this.initialPosition=initialPosition;
-        start(initialPosition);
     }
 
     public caballo(){
         this.initialPosition="a1";
-        start(initialPosition);
     }
     public caballo(int maxMoves){
         this.initialPosition="a1";
         this.maxMoves=maxMoves;
-        start(initialPosition);
+    }
+
+    public caballo(String initialPosition,int maxMoves){
+        this.initialPosition=initialPosition;
+        this.maxMoves=maxMoves;
     }
 
 
 
-    private void start(String initialPosition) {
+    public void start() {
         String move = initialPosition.toUpperCase();
 
         listMoves(initialPosition,0,move);
