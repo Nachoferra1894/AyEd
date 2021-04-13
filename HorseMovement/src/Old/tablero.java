@@ -1,3 +1,5 @@
+package Old;
+
 public class tablero {
     boolean[][] elTablero;
     String initialPosition;

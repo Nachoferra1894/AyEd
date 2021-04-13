@@ -56,4 +56,6 @@ public class DinamicStack<T> implements StackInterface<T> {
         }
         return toString+"]";
     }
+
+
 }
