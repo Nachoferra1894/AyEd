@@ -2,7 +2,7 @@
 
 <h1>Universidad Austral: Algoritmos y Estructuras de Datos</h1>
 
-<h3>Grupo 14 Integrantes: Ignacio Ferrari, Ignacio Mendez, Agustin Tittoto, Ignacio Estevo</h3>
+<h3>Grupo 14 Integrantes: Ignacio Ferrari, Ignacio Mendez, Agustin Titotto, Ignacio Estevo</h3>
 
 <ul><b>Trabajos Practicos</b>
   <li>TP 1 Comparacion de Algoritmos <b>(Completado)</b></li>
