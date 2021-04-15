@@ -7,7 +7,7 @@ public class tablero {
 
     public tablero(){ }
 
-    public DinamicStack moves(String position) {
+    public DinamicStack<String> moves(String position) {
         char column = position.toLowerCase().charAt(0);
         int numberOfColumna;
 
