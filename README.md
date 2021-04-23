@@ -11,7 +11,7 @@
   <li>TP Metrovias <b>(En progreso)</b></li></ul>
   <br>
   <ul><b><h4>Trabajos Practicos Alicia</h4></b>
-    <li>TP Arboles Binarios Ej 13 y 14 (Completado)</li>
-    <li>TP Arboles Binarios de Busqueda (En progreso)</li>
+    <li>TP Arboles Binarios Ej 13 y 14 <b>(Completado)</b></li>
+    <li>TP Arboles Binarios de Busqueda <b>(En progreso)</b></li>
   </ul>
   
