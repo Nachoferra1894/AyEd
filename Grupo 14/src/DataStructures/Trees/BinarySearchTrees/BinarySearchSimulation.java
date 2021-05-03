@@ -23,5 +23,6 @@ public class BinarySearchSimulation {
 
         System.out.println(genomeTree.search(influenza).getOrganism_Code());
         System.out.println(genomeTree.getMax().getOrganism_Code());
+        System.out.println(genomeTree.getMin().getOrganism_Code());
     }
 }
