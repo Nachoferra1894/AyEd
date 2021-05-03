@@ -61,7 +61,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
         }
     }
 
-
     public void insert(Comparable <T> x){
         root = insert(root, x);
     }
@@ -76,10 +75,10 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
         if (t == null){
             t = new TreeNode<>();
             t.value = (T) x;
-
         }
-        else if (x.compareTo(t.value) < 0)
-            t.left = insert(t.left, x);
+        else if (x.compareTo(t.value) < 0) {
+            System.out.println(t.value);
+            }
         else
             t.right = insert(t.right, x);
         return t;
