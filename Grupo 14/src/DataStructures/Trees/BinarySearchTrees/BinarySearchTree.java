@@ -91,14 +91,14 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
 
     private TreeNode<T> search(TreeNode<T> t, Comparable<T> x) throws ElementNotInTreeException {
         if (!isEmpty()) {
-            if (x.compareTo(t.value) == 0)
+            if (x.compareTo(t.value) == 0 && exists(x))
                 return t;
-            else if (x.compareTo(t.value) < 0)
+            else if (x.compareTo(t.value) < 0 && exists(x))
                 return search(t.left, x);
-            else
+            else if (x.compareTo(t.value) > 0 && exists(x))
                 return search(t.right, x);
         }
-        else{throw new ElementNotInTreeException("The element is not in the tree");}
+        throw new ElementNotInTreeException("The element is not in the tree");
     }
 
     private boolean exists(TreeNode<T> t, Comparable<T> x) {
