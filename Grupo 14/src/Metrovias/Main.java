@@ -18,19 +18,22 @@ public class Main {
     }
 
     private static void showStack() throws EmptyStackException {
-        System.out.println("Show stack...");
-        DynamicStack<Ticket> tickets = metrovia.gettotalTickets();
-        System.out.println("Tickets totales: " + tickets.getSize());
 
-        for (int i = 0; i < tickets.getSize(); i++) {
-            Ticket currentTicket = tickets.peek();
-            System.out.println("Ticket: " + i);
-            System.out.println("Code: " + currentTicket.getCode());
-            System.out.println("Time: " + currentTicket.showTime());
-            System.out.println("Price: " + currentTicket.getPrice());
-            System.out.println(" ");
-            tickets.pop();
-        }
+        DynamicStack<Ticket> tickets = metrovia.gettotalTickets();
+        System.out.println("Total Tickets: " + tickets.getSize());
+
+        int counter = 1;
+        while(!tickets.isEmpty()) {
+           Ticket currentTicket = tickets.peek();
+           System.out.println("Ticket: " + counter);
+           System.out.println("Code: " + currentTicket.getCode());
+           System.out.println("Time: " + currentTicket.getTime());
+           System.out.println("Price: " + currentTicket.getPrice());
+           System.out.println(" ");
+           tickets.pop();
+           counter++;
+       }
+
     }
 
     private static void createWindows() throws InvalidWindowException, EmptyStackException {
@@ -83,7 +86,7 @@ public class Main {
 
         peopleCalled = metrovia.getPeopleCalledCurrent();
         System.out.println("The " + windowsArr.length + " windows called a total of " + peopleCalled + " passengers this time");
-        System.out.println((metrovia.passengersInLine() + " are still waiting")); //Arreglar todavia no funciona
+        System.out.println((metrovia.passengersInLine() + " are still waiting"));
     }
 
     private static void showTotalEarnings() throws EmptyStackException {
@@ -100,8 +103,9 @@ public class Main {
             averageTime += w.queueTimeAverageInSeconds();
         }
         averageTime = averageTime / windowsArr.length;
+        averageTime = (float) (Math.round(averageTime * 100.0) / 100.0);
 
-        System.out.println("In average, the " + windowsArr.length + " windows, have an average waittime of " + averageTime/60 + " seconds");
+        System.out.println("In average, the " + windowsArr.length + " windows, have an average waittime of " + averageTime + " seconds");
     }
 
 }

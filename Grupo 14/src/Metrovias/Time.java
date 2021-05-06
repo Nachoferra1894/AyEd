@@ -1,6 +1,6 @@
 package Metrovias;
 
-public class Time {
+public class Time { //Tratamos de implementarla pero tuvimos problemas con el substractTimes y despues de varios dias de no poder resolverlo optamos por usar un int o float
     int hours, minutes, seconds;
 
     public Time(){

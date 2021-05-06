@@ -3,9 +3,10 @@ package Metrovias;
 public class Passenger {
     private Ticket currentTicket;
     private Window currentWindow;
-    Time enteredQueue; //This saves the time at which the passenger entered the queue
+    int enteredQueue; //This saves the time at which the passenger entered the queue
+    int waitTime;
 
-    public Passenger(Time enteredQueue){
+    public Passenger(int enteredQueue){
         this.enteredQueue = enteredQueue;
     }
 
@@ -17,18 +18,9 @@ public class Passenger {
         this.currentTicket = aTicket;
     }
 
+    public int getEnteredQueue() {return enteredQueue;}
+
     public Ticket getTicket() {return currentTicket;}
 
-    public Time getTimeEnteredQueue(){
-        if (enteredQueue.getAverageInSeconds(1) == 0){
-            Time minTime = new Time(); // If the person entered the queue and was called at the same time, time should be just 30 secs as a minTime.
-            minTime.seconds = 30;
-            return minTime;
-        }
-        else return enteredQueue;
-    }
-
-    public String getWaitTimeToString(){
-        return this.currentTicket.showTime();
-    }
+    public int getWaitTimeInSeconds(){return waitTime;}
 }

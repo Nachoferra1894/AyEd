@@ -26,7 +26,7 @@ public class Window {
         totalPassengers++;
     }
 
-    public void callPassenger(Time metroviaTime) throws EmptyQueueException { // I assume that when the passenger is called he/she instantly gets his ticket and ends the waittime.
+    public void callPassenger(int metroviaTime) throws EmptyQueueException { // I assume that when the passenger is called he/she instantly gets his ticket and ends the waittime.
         lastCalled = 0;
         Ticket aTicket;
 
@@ -36,7 +36,8 @@ public class Window {
         lastCalled++;
 
         //Tickets handling
-        aTicket = new Ticket((int) metroviaTime.substractTimesInSeconds(called.getTimeEnteredQueue())); //Calulates the waitTime of the passenger
+        int waitTime =  metroviaTime - called.getEnteredQueue(); // If someone enters the queue and is immeadiately called the time is 0. Should be 30 at least?
+        aTicket = new Ticket(waitTime); //Calulates the waitTime of the passenger
         called.assignTicket(aTicket); //We give the passenger the ticket
         tickets.push(aTicket);       //We stack the called passengers ticket
     }
@@ -45,24 +46,19 @@ public class Window {
 
     public float queueTimeAverageInSeconds() throws EmptyQueueException, EmptyStackException {
         DynamicStack<Ticket> auxStack = getTickets();
-        Time waitTime = new Time();
+        int waitTime = 0;
 
-        for (int i = 0; i < auxStack.getSize(); i++) {
-            if (!auxStack.isEmpty()) {
-                waitTime.sumTimes(auxStack.peek().getTime()); //We add the time of every called person.
-                auxStack.pop();
-            }
+        while (!auxStack.isEmpty()) {
+            waitTime += auxStack.peek().getTime(); //We add the time of every called person.
+            auxStack.pop();
         }
-        return waitTime.getAverageInSeconds(passengersCalled);
+        return (float) waitTime/passengersCalled;
     }
 
     public int getTotalPassengers() {return totalPassengers;}
 
     public int getPassengersCalled() {return tickets.getSize();}
 
-    public DynamicStack<Ticket> getTickets(){ return tickets;}
-
-    public int getAmountWaitingPassengers(){return buffer.size();} // totalpassengers - calledpassengers
-
+    public DynamicStack<Ticket> getTickets(){return tickets;}
 }
 

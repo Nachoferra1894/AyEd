@@ -8,7 +8,7 @@ public class Metrovias {
 
     private final Window[] windows;
     private final int amountWindows;
-    Time currentTime;
+    int currentTime;
     private int peopleCalledCurrent;
 
 
@@ -16,7 +16,7 @@ public class Metrovias {
         this.amountWindows = amountWindows;
         windows = new Window[amountWindows];
         initiateMetrovias();
-        currentTime = new Time();
+        currentTime = 0;
         peopleCalledCurrent = 0;
     }
     public void initiateMetrovias(){
@@ -26,13 +26,13 @@ public class Metrovias {
     }
     public void pass30Seconds() throws EmptyQueueException { //30 seconds are added on the clock. That time is taken as reference for newly arrived passengers
         Passenger[] newlyArrived = new Passenger[5];
-        currentTime.add30Seconds();
         for (int i = 0; i < 5; i++) { // 5 passengers are created and assigned to a random window
             newlyArrived[i] = new Passenger(currentTime);
             int randWindow = (int) ((Math.random() * getAmountWindows()));
             windows[randWindow].enqueuePassenger(newlyArrived[i]);
         }
         callNext();
+        currentTime+= 30;
     }
 
     private void callNext() throws EmptyQueueException { //We see if a passenger should be called (50% chance)
@@ -55,24 +55,17 @@ public class Metrovias {
 
     public int getPeopleCalledCurrent() {return peopleCalledCurrent;}
 
-    public DynamicStack<Ticket> gettotalTickets() throws EmptyStackException {
+    public DynamicStack<Ticket> gettotalTickets() throws EmptyStackException { // No funciona
         DynamicStack<Ticket> tickets = new DynamicStack<>();
         for (Window w: windows) {
-            while (!w.getTickets().isEmpty()){
-                tickets.push(w.getTickets().peek());
+            while (!w.tickets.isEmpty()){ //No funciona. Toma como que no hay ningun ticket en las ventanas. Chequear metodo callPassenger en Windows?
+                tickets.push(w.tickets.peek());
                 w.tickets.pop();
             }
         }
         return tickets;
     }
 
-    public int getTotalPassengers(){
-        int totalPassengers = 0;
-        for (Window w: windows) {
-            totalPassengers += w.getTotalPassengers();
-        }
-        return totalPassengers;
-    }
     public int passengersInLine(){
         int passengersInLine = 0;
         for (Window w: windows) {
