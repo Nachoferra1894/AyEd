@@ -1,10 +1,7 @@
 package DataStructures.Trees.CompareBinaryTrees;
 
 import DataStructures.Trees.BinarySearchTrees.BinarySearchTree;
-import DataStructures.Trees.Common.BinaryTree;
-
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.Random;
 
 public class ComparisonSimulation {
 
@@ -52,14 +49,11 @@ public class ComparisonSimulation {
 
 
 
-    public static int[] generateRandomArray(){ //We previously used an arraylist with random numbers, but there were duplicates
-        int[] arr = new int[1000];                 //The duplicates affected the speeds
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = i;
-        }
-        Collections.shuffle(Arrays.asList(arr));
+    public static int[] generateRandomArray(){
 
-        return arr;
+        return new Random().ints(0, 100000)
+                .distinct()
+                .limit(1000).toArray();
     }
 
 }
