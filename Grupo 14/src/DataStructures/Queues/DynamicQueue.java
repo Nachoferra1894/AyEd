@@ -13,7 +13,7 @@ public class DynamicQueue<T> implements Queue<T> {
 
     @Override
     public void enqueue(T newElement) {
-            Node<T> aux = new Node<T>(newElement, null);
+        Node<T> aux = new Node<T>(newElement, null);
             if(isEmpty()){
                 front = aux;
             }
