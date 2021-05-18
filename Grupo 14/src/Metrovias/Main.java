@@ -18,7 +18,8 @@ public class Main {
     }
 
     private static void showStack() throws EmptyStackException {
-
+        System.out.println("Show stack is not required");
+/* Problema con los stacks. No pudimos terminar de implementarlo
         DynamicStack<Ticket> tickets = metrovia.gettotalTickets();
         System.out.println("Total Tickets: " + tickets.getSize());
 
@@ -33,7 +34,7 @@ public class Main {
            tickets.pop();
            counter++;
        }
-
+*/
     }
 
     private static void createWindows() throws InvalidWindowException, EmptyStackException {

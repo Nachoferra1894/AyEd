@@ -46,11 +46,18 @@ public class Window {
 
     public float queueTimeAverageInSeconds() throws EmptyQueueException, EmptyStackException {
         DynamicStack<Ticket> auxStack = getTickets();
+
         int waitTime = 0;
 
         while (!auxStack.isEmpty()) {
-            waitTime += auxStack.peek().getTime(); //We add the time of every called person.
-            auxStack.pop();
+            if (auxStack.peek().getTime() < 30){
+                waitTime+= 30; // A minimum of 30 seconds must be waited in queue
+                auxStack.pop();
+            }
+            else {
+                waitTime += auxStack.peek().getTime(); //We add the time of every called person.
+                auxStack.pop();
+            }
         }
         return (float) waitTime/passengersCalled;
     }
