@@ -3,6 +3,9 @@ package DataStructures.Trees.CompareBinaryTrees;
 import DataStructures.Trees.Common.BinaryTree;
 
 public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
+    private RBNode root;
+    private RBNode TNULL;
+
     @Override
     public boolean isEmpty() {
         return root == null;
@@ -21,8 +24,58 @@ public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
         t.root = root.right;
         return t;
     }
-    private RBNode root;
-    private RBNode TNULL;
+
+
+    public T getRoot(){ //To Fix
+        return (T)(Integer)this.root.data;
+    }
+    // insert the key to the tree in its appropriate position
+    // and fix the tree
+    public void insert(int key) {
+        // Ordinary Binary Search Insertion
+        RBNode node = new RBNode();
+        node.parent = null;
+        node.data = key;
+        node.left = TNULL;
+        node.right = TNULL;
+        node.color = 1; // new node must be red
+
+        RBNode y = null;
+        RBNode x = this.root;
+
+        while (x != TNULL) {
+            y = x;
+            if (node.data < x.data) {
+                x = x.left;
+            } else {
+                x = x.right;
+            }
+        }
+
+        // y is parent of x
+        node.parent = y;
+        if (y == null) {
+            root = node;
+        } else if (node.data < y.data) {
+            y.left = node;
+        } else {
+            y.right = node;
+        }
+
+        // if new node is a root node, simply return
+        if (node.parent == null){
+            node.color = 0;
+            return;
+        }
+
+        // if the grandparent is null, simply return
+        if (node.parent.parent == null) {
+            return;
+        }
+
+        // Fix the tree
+        fixInsert(node);
+    }
 
     private void preOrderHelper(RBNode node) {
         if (node != TNULL) {
@@ -30,6 +83,14 @@ public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
             preOrderHelper(node.left);
             preOrderHelper(node.right);
         }
+    }
+    public int height(BinaryTree<T> aTree) {
+        if (aTree.isEmpty()) {
+            return -1;
+        }
+        int heightL = height(aTree.getRight());
+        int heightR = height(aTree.getRight());
+        return 1 + Math.max(heightL, heightR);
     }
 
     private void inOrderHelper(RBNode node) {
@@ -273,19 +334,16 @@ public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
     }
 
     // Pre-Order traversal
-    // Node.Left Subtree.Right Subtree
     public void preorder() {
         preOrderHelper(this.root);
     }
 
     // In-Order traversal
-    // Left Subtree . Node . Right Subtree
     public void inorder() {
         inOrderHelper(this.root);
     }
 
     // Post-Order traversal
-    // Left Subtree . Right Subtree . Node
     public void postorder() {
         postOrderHelper(this.root);
     }
@@ -314,15 +372,9 @@ public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
 
     // find the successor of a given node
     public RBNode successor(RBNode x) {
-        // if the right subtree is not null,
-        // the successor is the leftmost node in the
-        // right subtree
         if (x.right != TNULL) {
             return minimum(x.right);
         }
-
-        // else it is the lowest ancestor of x whose
-        // left child is also an ancestor of x.
         RBNode y = x.parent;
         while (y != TNULL && x == y.right) {
             x = y;
@@ -333,19 +385,14 @@ public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
 
     // find the predecessor of a given node
     public RBNode predecessor(RBNode x) {
-        // if the left subtree is not null,
-        // the predecessor is the rightmost node in the
-        // left subtree
         if (x.left != TNULL) {
             return maximum(x.left);
         }
-
         RBNode y = x.parent;
         while (y != TNULL && x == y.left) {
             x = y;
             y = y.parent;
         }
-
         return y;
     }
 
@@ -387,74 +434,14 @@ public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
         x.parent = y;
     }
 
-    // insert the key to the tree in its appropriate position
-    // and fix the tree
-    public void insert(int key) {
-        // Ordinary Binary Search Insertion
-        RBNode node = new RBNode();
-        node.parent = null;
-        node.data = key;
-        node.left = TNULL;
-        node.right = TNULL;
-        node.color = 1; // new node must be red
-
-        RBNode y = null;
-        RBNode x = this.root;
-
-        while (x != TNULL) {
-            y = x;
-            if (node.data < x.data) {
-                x = x.left;
-            } else {
-                x = x.right;
-            }
-        }
-
-        // y is parent of x
-        node.parent = y;
-        if (y == null) {
-            root = node;
-        } else if (node.data < y.data) {
-            y.left = node;
-        } else {
-            y.right = node;
-        }
-
-        // if new node is a root node, simply return
-        if (node.parent == null){
-            node.color = 0;
-            return;
-        }
-
-        // if the grandparent is null, simply return
-        if (node.parent.parent == null) {
-            return;
-        }
-
-        // Fix the tree
-        fixInsert(node);
-    }
-
-    public T getRoot(){
-        return (T)(Integer)this.root.data;
-    }
-
     // delete the node from the tree
     public void deleteNode(int data) {
         deleteNodeHelper(this.root, data);
     }
 
-    // print the tree structure on the screen
+    // print the tree structure on the screen (taken from internet)
     public void prettyPrint() {
         printHelper(this.root, "", true);
     }
 
-    public int height(BinaryTree<T> aTree) {
-        if (aTree.isEmpty()) {
-            return -1;
-        }
-        int heightL = height(aTree.getRight());
-        int heightR = height(aTree.getRight());
-        return 1 + Math.max(heightL, heightR);
-    }
 }

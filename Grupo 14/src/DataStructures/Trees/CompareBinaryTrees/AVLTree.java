@@ -147,7 +147,6 @@ public class AVLTree<T extends Comparable<T>> implements BinaryTree<Integer> {
         while (current.right != null) {
             current = current.right;
         }
-
         return current;
     }
 
@@ -189,12 +188,10 @@ public class AVLTree<T extends Comparable<T>> implements BinaryTree<Integer> {
         reHeight(AVLNode);
     }
 
-    public AVLNode search(int key) {
-        return binarySearch(root, key);
-    }
+    public AVLNode<T> search(int key) { return binarySearch(root, key);}
 
     int k = 0;
-    private AVLNode binarySearch(AVLNode AVLNode, int key) {
+    private AVLNode<T> binarySearch(AVLNode<T> AVLNode, int key) {
         if (AVLNode == null) return null;
 
         if (key == AVLNode.value) {
@@ -220,7 +217,7 @@ public class AVLTree<T extends Comparable<T>> implements BinaryTree<Integer> {
         System.out.println();
     }
 
-    private void inorder(AVLNode AVLNode) {
+    private void inorder(AVLNode<T> AVLNode) {
         if (AVLNode != null) {
             inorder(AVLNode.left);
             System.out.print(AVLNode.toString());
