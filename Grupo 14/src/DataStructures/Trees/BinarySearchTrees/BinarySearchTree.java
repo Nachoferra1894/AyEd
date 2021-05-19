@@ -89,14 +89,19 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
         return search(root,x).value;
     }
 
+    public int k = 0;
     private TreeNode<T> search(TreeNode<T> t, Comparable<T> x) throws ElementNotInTreeException {
         if (!isEmpty()) {
             if (x.compareTo(t.value) == 0 && exists(x))
                 return t;
-            else if (x.compareTo(t.value) < 0 && exists(x))
+            else if (x.compareTo(t.value) < 0 && exists(x)) {
+                k++;
                 return search(t.left, x);
-            else if (x.compareTo(t.value) > 0 && exists(x))
+            }
+            else if (x.compareTo(t.value) > 0 && exists(x)) {
+                k++;
                 return search(t.right, x);
+            }
         }
         throw new ElementNotInTreeException("The element is not in the tree");
     }
@@ -141,6 +146,15 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
             return t;
         }
         else {throw new EmptyTreeException("The tree is empty, add elements before deleting");}
+    }
+
+    public int height(BinaryTree<T> aTree) {
+        if (aTree.isEmpty()) {
+            return -1;
+        }
+        int heightL = height(aTree.getLeft());
+        int heightR = height(aTree.getRight());
+        return 1 + Math.max(heightL, heightR);
     }
 }
 

@@ -1,12 +1,14 @@
 package DataStructures.Trees.CompareBinaryTrees;
 
 import DataStructures.Trees.BinarySearchTrees.BinarySearchTree;
+import DataStructures.Trees.Common.ElementNotInTreeException;
+
 import java.util.Random;
 
 public class ComparisonSimulation {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ElementNotInTreeException {
         int[] anIntArray = generateRandomArray();
 
         //Construimos cada arbol y guardamos el tiempo de ejecucion del metodo
@@ -18,6 +20,23 @@ public class ComparisonSimulation {
 
         RBTree<Integer> redBlackTree = new RBTree<>();
         System.out.println("Time in miliseconds taken to fill a Red and Black Tree: " + fillRBTree(redBlackTree, anIntArray));
+
+        System.out.println(binarySearchTree.height(binarySearchTree));
+        System.out.println(avlTree.height(avlTree));
+        System.out.println(redBlackTree.height(redBlackTree));
+
+
+        binarySearchTree.search(5000);
+        System.out.println(binarySearchTree.k);
+
+        avlTree.search(5000);
+        System.out.println(avlTree.k);
+
+        redBlackTree.searchTree(5000);
+        System.out.println(redBlackTree.k);
+
+
+
     }
 
     private static long fillBinaryTree(BinarySearchTree<Integer> aTree, int[] anIntArray) { // Retorna el tiempo que tarda en insertar todos los valores al arbol

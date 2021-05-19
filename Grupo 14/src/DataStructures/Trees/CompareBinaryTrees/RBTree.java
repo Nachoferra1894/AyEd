@@ -5,17 +5,21 @@ import DataStructures.Trees.Common.BinaryTree;
 public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
     @Override
     public boolean isEmpty() {
-        return false;
+        return root == null;
     }
 
     @Override
     public BinaryTree<T> getLeft() {
-        return null;
+        RBTree<T> t = new RBTree<>();
+        t.root = root.left;
+        return t;
     }
 
     @Override
     public BinaryTree<T> getRight() {
-        return null;
+        RBTree<T> t = new RBTree<>();
+        t.root = root.right;
+        return t;
     }
     private RBNode root;
     private RBNode TNULL;
@@ -44,14 +48,17 @@ public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
         }
     }
 
+    int k = 0;
     private RBNode searchTreeHelper(RBNode node, int key) {
         if (node == TNULL || key == node.data) {
             return node;
         }
 
         if (key < node.data) {
+            k++;
             return searchTreeHelper(node.left, key);
         }
+        k++;
         return searchTreeHelper(node.right, key);
     }
 
@@ -440,5 +447,14 @@ public class RBTree<T extends Comparable<T>> implements BinaryTree<T> {
     // print the tree structure on the screen
     public void prettyPrint() {
         printHelper(this.root, "", true);
+    }
+
+    public int height(BinaryTree<T> aTree) {
+        if (aTree.isEmpty()) {
+            return -1;
+        }
+        int heightL = height(aTree.getRight());
+        int heightR = height(aTree.getRight());
+        return 1 + Math.max(heightL, heightR);
     }
 }

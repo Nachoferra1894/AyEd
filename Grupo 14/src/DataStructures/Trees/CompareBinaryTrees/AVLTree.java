@@ -1,9 +1,8 @@
 package DataStructures.Trees.CompareBinaryTrees;
 
-import DataStructures.Queues.Node;
 import DataStructures.Trees.Common.BinaryTree;
 
-public class AVLTree<T extends Comparable<T>> implements BinaryTree<T> {
+public class AVLTree<T extends Comparable<T>> implements BinaryTree<Integer> {
     private AVLNode root = null;
 
     public void insert(int data) {
@@ -194,6 +193,7 @@ public class AVLTree<T extends Comparable<T>> implements BinaryTree<T> {
         return binarySearch(root, key);
     }
 
+    int k = 0;
     private AVLNode binarySearch(AVLNode AVLNode, int key) {
         if (AVLNode == null) return null;
 
@@ -202,10 +202,12 @@ public class AVLTree<T extends Comparable<T>> implements BinaryTree<T> {
         }
 
         if (key < AVLNode.value && AVLNode.left != null) {
+            k++;
             return binarySearch(AVLNode.left, key);
         }
 
         if (key > AVLNode.value && AVLNode.right != null) {
+            k++;
             return binarySearch(AVLNode.right, key);
         }
 
@@ -228,22 +230,35 @@ public class AVLTree<T extends Comparable<T>> implements BinaryTree<T> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return root == null;
     }
 
     @Override
-    public T getRoot() {
-        return null;
+    public Integer getRoot() {
+        return root.value;
     }
 
     @Override
-    public BinaryTree<T> getLeft() {
-        return null;
+    public BinaryTree<Integer> getLeft() {
+        AVLTree<Integer> t = new AVLTree<>();
+        t.root = root.left;
+        return t;
     }
 
     @Override
-    public BinaryTree<T> getRight() {
-        return null;
+    public BinaryTree<Integer> getRight() {
+        AVLTree<Integer> t = new AVLTree<>();
+        t.root = root.right;
+        return t;
+    }
+
+    public int height(BinaryTree<T> aTree) {
+        if (aTree.isEmpty()) {
+            return -1;
+        }
+        int heightL = height(aTree.getRight());
+        int heightR = height(aTree.getRight());
+        return 1 + Math.max(heightL, heightR);
     }
 }
 
