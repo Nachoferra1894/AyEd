@@ -60,4 +60,10 @@ public class Venta {
     public int getMes() {
         return mes;
     }
+
+    @Override
+    public String toString() {
+        return codigoDeDestino + ";" + codigoDeArticulo + ";" + cantidad + ";" + precioUnitarioEnDolares + dia + ";"+ mes +";" + anio;
+
+    }
 }

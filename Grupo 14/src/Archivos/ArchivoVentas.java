@@ -8,14 +8,14 @@ import java.io.RandomAccessFile;
 public class ArchivoVentas {
         private File f;
         private RandomAccessFile raf;
-        private int sizeReg = 30;
+        private int sizeReg = 35;
 
         public ArchivoVentas(String nombre)throws FileNotFoundException {
             f = new File(nombre);
             raf = new RandomAccessFile(f,"rw");
         }
 
-        public void escribir(Venta p)  throws IOException {
+        public void escribir(Venta p)  throws IOException { //Funciona pero escribe en caracteres raros. Si solo uso WriteUTF funciona el programa pero se escribe en una linea
             raf.writeUTF(p.getCodigoDeDestino());
             raf.writeInt(p.getCodigoDeArticulo());
             raf.writeInt(p.getCantidad());
