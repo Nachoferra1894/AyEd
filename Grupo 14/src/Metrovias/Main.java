@@ -41,9 +41,9 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         System.out.print("\n" + "------------------------------------" + "\n" +
-                "Bienvenido a Metrovias" + "\n" + "Precio del ticket: 10$" +
+                "Welcome to Metrovias" + "\n" + "Ticket Price: 10$" +
                 "\n" + "\n" +
-                "Ingrese la cantidad de ventanillas a simular: ");
+                "Enter amount of windows to simulate: ");
 
         int windowsAmount = input.nextInt();
         metrovia = new Metrovias(windowsAmount); //Initialize metrovias with the amount of windows
@@ -51,7 +51,7 @@ public class Main {
         if (windowsAmount >= 5 && windowsAmount <= 25){
             windowsArr = metrovia.getWindows(); //for easier handling
         }
-        else{ throw new InvalidWindowException("Ingresar una cantidad entre 5 y 25");}
+        else{ throw new InvalidWindowException("Enter an amount between 5 and 25");}
     }
 
     public static void mainScreen() throws EmptyStackException, EmptyQueueException {
@@ -61,21 +61,21 @@ public class Main {
             System.out.println("\n" + "------------------------------------" + "\n" +
                     "MetroviasTP" + "\n" +
                     "\n" + "Current time: " + metrovia.currentTime + "\n" +
-                    "1. Avanzar 30 segundos" + "\n" +
-                    "2. Terminar la simulacion" + "\n");
+                    "1. Fast forward 30 seconds" + "\n" +
+                    "2. End Simlation" + "\n");
 
             switch (input.nextInt()) {
                 case 1 -> {
                     fastForward30Sec();
                 }
                 case 2 -> {
-                    System.out.println("Simulacion terminada");
+                    System.out.println("Simulation Ended");
                     showTotalEarnings();
                     showAverageWaitTime();
                     //System.exit(0);
                     return;
                 }
-                default -> System.out.println("Opcion invalida");
+                default -> System.out.println("Invalid option");
             }
         }
     }
