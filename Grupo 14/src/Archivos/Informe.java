@@ -48,21 +48,18 @@ public class Informe {
                 cotizacionesPorMes[i] = new CotizacionDolar(parts[0], parts[1]);
             }
 
-            for (int i = 0; i < archV.cantReg(); i++) { //Lee muy pocas ventas
+            for (int i = 0; i < archV.cantReg(); i++) {
                 Venta unaVenta = archV.leer();
-                System.out.println(unaVenta.toString());
-                for (int j = 0; j < montoDestinos.length; j++) {
-                    if (unaVenta.getCodigoDeDestino().equals(montoDestinos[j].getCodigoDeDestino())){
-                        montoDestinos[j].setMontoDestino(unaVenta.getCantidad()*unaVenta.getPrecioUnitarioEnDolares()*cotizacionesPorMes[unaVenta.getMes()].getCotizacion());
+                for (MontoDestino montoDestino : montoDestinos) { //Si coincide el lugar le sumamos el monto
+                    if (unaVenta.getCodigoDeDestino().equals(montoDestino.getCodigoDeDestino())) {
+                        montoDestino.setMontoDestino(unaVenta.getCantidad() * unaVenta.getPrecioUnitarioEnDolares() * cotizacionesPorMes[unaVenta.getMes()-1].getCotizacion());
                     }
                 }
             }
 
-            for (int i = 0; i < montoDestinos.length; i++) {
-                System.out.println(montoDestinos[i].toString());
+            for (MontoDestino montoDestino : montoDestinos) {
+                System.out.println(montoDestino.toString());
             }
-
-            archV.cerrar();
             bf.close();
             bf2.close();
 
@@ -84,16 +81,15 @@ public class Informe {
             }
 
             int[] montoPorMes = new int[12];
+
             for (int i = 0; i < archV.cantReg(); i++) {
                 Venta venta = archV.leer();
-                for (int j = 0; j < montoPorMes.length-1; j++) { // Problema con el mes 12. Sin montoPorMes.length -1 da out of bounds
+                for (int j = 0; j < montoPorMes.length; j++) {
                     if (venta.getMes() == (j+1)){
-                        montoPorMes[j] += venta.getCantidad()*venta.getPrecioUnitarioEnDolares()*cotizacionesPorMes[venta.getMes()].getCotizacion();
-
+                        montoPorMes[j] += venta.getCantidad()*venta.getPrecioUnitarioEnDolares()*cotizacionesPorMes[venta.getMes()-1].getCotizacion();
                     }
                 }
             }
-
             for (int i = 0; i < montoPorMes.length ; i++) {
                 System.out.println("\nMes: " + (i+1) + "\n" +
                         "Monto Total: " + montoPorMes[i]);
@@ -117,35 +113,28 @@ public class Informe {
             for (int i = 0; i < destinos.length; i++) {
                 destinos[i] = split(bf.readLine());
             }
-
-            for (int i = 0; i < 1000; i++) { //Creamos 1000 ventas aleatorias
+            for (int i = 0; i < 1000; i++) { //Creamos 1000 ventas al random
                 archV.fin();
-                archV.escribir(new Venta(destinos[(int) Math.floor(Math.random()*(destinos.length-1))], i,
-                        (int) Math.floor(Math.random()*(10)+1), (int) Math.floor(Math.random()*(50)+10),
+                archV.escribir(new Venta(destinos[(int) Math.floor(Math.random()*(30))], i,
+                        (int) Math.floor(Math.random()*(10)+1), (int) Math.floor(Math.random()*(41)+10),
                         (int) Math.floor(Math.random()*(30)+1), (int) Math.floor(Math.random()*(12)+1),
-                                2021));
+                        2021));
             }
-
             bf.close();
             archV.cerrar();
 
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        System.out.println("Informe generado Exitosamente");
-
+        System.out.println("Informe generado exitosamente");
     }
-
 
     private String split(String line){
         String[] parts = line.split(";");
         return parts[0];
     }
 
-    private String[] splitDestino(String line){
-        String[] parts = line.split(";");
-        return parts;
-    }
+    private String[] splitDestino(String line){return line.split(";");}
 
     private int[] splitCotizacion(String line){
         int[] parts = new int[2];
@@ -154,5 +143,4 @@ public class Informe {
         parts[1] = Integer.parseInt(parts2[1]);
         return parts;
     }
-
 }
