@@ -5,16 +5,16 @@ public class Venta {
     private int codigoDeArticulo;
     private int cantidad;
     private int precioUnitarioEnDolares;
-    private int dia,mes,anio;
+    private int dia,mes,año;
 
-    public Venta(String codigoDeDestino, int codigoDeArticulo, int cantidad, int precioEnDolares, int dia, int mes, int anio) {
+    public Venta(String codigoDeDestino, int codigoDeArticulo, int cantidad, int precioEnDolares, int dia, int mes, int año) {
         this.codigoDeDestino = codigoDeDestino;
         this.codigoDeArticulo = codigoDeArticulo;
         this.cantidad = cantidad;
         this.precioUnitarioEnDolares = precioEnDolares;
         this.dia = dia;
         this.mes = mes;
-        this.anio = anio;
+        this.año = año;
     }
 
     public String getCodigoDeDestino() {
@@ -53,8 +53,8 @@ public class Venta {
         return dia;
     }
 
-    public int getAnio() {
-        return anio;
+    public int getAño() {
+        return año;
     }
 
     public int getMes() {
@@ -63,7 +63,14 @@ public class Venta {
 
     @Override
     public String toString() {
-        return codigoDeDestino + ";" + codigoDeArticulo + ";" + cantidad + ";" + precioUnitarioEnDolares + dia + ";"+ mes +";" + anio;
-
+        return "Venta{" +
+                "codigoDeDestino='" + codigoDeDestino + '\'' +
+                ", codigoDeArticulo=" + codigoDeArticulo +
+                ", cantidad=" + cantidad +
+                ", precioUnitarioEnDolares=" + precioUnitarioEnDolares +
+                ", dia=" + dia +
+                ", mes=" + mes +
+                ", año=" + año +
+                '}';
     }
 }

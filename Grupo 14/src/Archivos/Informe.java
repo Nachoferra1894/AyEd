@@ -1,6 +1,7 @@
 package Archivos;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Scanner;
 
 public class Informe {
@@ -12,7 +13,7 @@ public class Informe {
         int opcion = menu();
         while (opcion < 4) {
             switch (opcion) {
-                case 1 -> generarArchivoVentas();
+                case 1 -> generarArchvioVentas();
                 case 2 -> montoPorDestino();
                 case 3 -> montoPorMes();
             }
@@ -30,38 +31,37 @@ public class Informe {
 
     public void montoPorDestino(){
         try{
-            //RandomAccessFile raf = new RandomAccessFile("RegistroDestino.txt", "r");
-            //RandomAccessFile raf2 = new RandomAccessFile("RegistroCotizacion.txt", "r");
             ArchivoVentas archV = new ArchivoVentas(nombreArchivo);
             archV.inicio();
-            BufferedReader bf = new BufferedReader(new FileReader("RegistroDestino"));
-            BufferedReader bf2 = new BufferedReader(new FileReader("RegistroCotizacion"));
+            BufferedReader bf = new BufferedReader(new FileReader("Grupo 14/src/Archivos/RegistroDestino"));
+            BufferedReader bf2 = new BufferedReader(new FileReader("Grupo 14/src/Archivos/RegistroCotizacion"));
             MontoDestino[] montoDestinos = new MontoDestino[30];
             CotizacionDolar[] cotizacionesPorMes = new CotizacionDolar[12];
 
-            for (int i = 0; i < 30; i++) {
+            for (int i = 0; i < montoDestinos.length; i++) {
                 String[] parts = splitDestino(bf.readLine());
                 montoDestinos[i] = new MontoDestino(parts[0], parts[1]);
             }
 
-            for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < cotizacionesPorMes.length; i++) {
                 int[] parts = splitCotizacion(bf2.readLine());
                 cotizacionesPorMes[i] = new CotizacionDolar(parts[0], parts[1]);
             }
 
-            for (int i = 0; i < archV.cantReg(); i++) {
-
-                Venta venta = archV.leer();
-                for (MontoDestino montoDestino : montoDestinos) {
-                    if (venta.getCodigoDeDestino().equals(montoDestino.getCodigoDeDestino())) {
-                        montoDestino.setMontoDestino(venta.getCantidad() * venta.getPrecioUnitarioEnDolares() * cotizacionesPorMes[venta.getMes()].getCotizacion());
+            for (int i = 0; i < archV.cantReg(); i++) { //Lee muy pocas ventas
+                Venta unaVenta = archV.leer();
+                System.out.println(unaVenta.toString());
+                for (int j = 0; j < montoDestinos.length; j++) {
+                    if (unaVenta.getCodigoDeDestino().equals(montoDestinos[j].getCodigoDeDestino())){
+                        montoDestinos[j].setMontoDestino(unaVenta.getCantidad()*unaVenta.getPrecioUnitarioEnDolares()*cotizacionesPorMes[unaVenta.getMes()].getCotizacion());
                     }
                 }
             }
 
-            for (MontoDestino montoDestino : montoDestinos) {
-                System.out.println(montoDestino.toString());
+            for (int i = 0; i < montoDestinos.length; i++) {
+                System.out.println(montoDestinos[i].toString());
             }
+
             archV.cerrar();
             bf.close();
             bf2.close();
@@ -75,8 +75,7 @@ public class Informe {
         try {
             ArchivoVentas archV = new ArchivoVentas(nombreArchivo);
             archV.inicio();
-            //RandomAccessFile raf = new RandomAccessFile("RegistroCotizacion.txt", "rw");
-            BufferedReader bf = new BufferedReader(new FileReader("RegistroCotizacion"));
+            BufferedReader bf = new BufferedReader(new FileReader("Grupo 14/src/Archivos/RegistroCotizacion"));
 
             CotizacionDolar[] cotizacionesPorMes = new CotizacionDolar[12];
             for (int i = 0; i < 12; i++) {
@@ -87,9 +86,10 @@ public class Informe {
             int[] montoPorMes = new int[12];
             for (int i = 0; i < archV.cantReg(); i++) {
                 Venta venta = archV.leer();
-                for (int j = 0; j < montoPorMes.length; j++) {
+                for (int j = 0; j < montoPorMes.length-1; j++) { // Problema con el mes 12. Sin montoPorMes.length -1 da out of bounds
                     if (venta.getMes() == (j+1)){
                         montoPorMes[j] += venta.getCantidad()*venta.getPrecioUnitarioEnDolares()*cotizacionesPorMes[venta.getMes()].getCotizacion();
+
                     }
                 }
             }
@@ -107,40 +107,25 @@ public class Informe {
         }
     }
 
-    public void generarArchivoVentas(){
+    public void generarArchvioVentas(){
         try{
             ArchivoVentas archV = new ArchivoVentas(nombreArchivo);
 
             String[] destinos = new String[30];
-            //RandomAccessFile raf = new RandomAccessFile("RegistroDestino.txt", "rw");
-            BufferedReader bf = new BufferedReader(new FileReader("RegistroDestino"));
-            File file;
-            //BufferedWriter bw = new BufferedWriter(new FileWriter("RegistroDestino"));
+            BufferedReader bf = new BufferedReader(new FileReader("Grupo 14/src/Archivos/RegistroDestino"));
 
-            String line;
-                for (int i = 0; i < destinos.length-1; i++) {
-                    line = bf.readLine();
-                    if (line != null) {
-                        destinos[i] = splitLn(line);
-                    }
-                }
-
-            for (int i = 0; i < 350; i++) { // Creamos una venta random y la escribimos en el archivo
-                archV.fin();
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("RegistroVentas.txt",true));
-                //No pudimos usar el raf.writeUTF porque lo escribia en caracteres raros
-
-                Venta ventaRandom = new Venta(destinos[(int) Math.floor(Math.random()*(destinos.length-1))], i,
-                        (int) Math.floor(Math.random()*(10-1+1)+1), (int) Math.floor(Math.random()*(50-10+1)+10),
-                        (int) Math.floor(Math.random()*(30-1+1)+1), (int) Math.floor(Math.random()*(12-1+1)+1),
-                        2021);
-
-                //archV.escribir(ventaRandom);
-                bufferedWriter.write(ventaRandom.toString()); // Escribimos y hacemos un salto de linea
-                bufferedWriter.newLine();
-                bufferedWriter.close();
-
+            for (int i = 0; i < destinos.length; i++) {
+                destinos[i] = split(bf.readLine());
             }
+
+            for (int i = 0; i < 1000; i++) { //Creamos 1000 ventas aleatorias
+                archV.fin();
+                archV.escribir(new Venta(destinos[(int) Math.floor(Math.random()*(destinos.length-1))], i,
+                        (int) Math.floor(Math.random()*(10)+1), (int) Math.floor(Math.random()*(50)+10),
+                        (int) Math.floor(Math.random()*(30)+1), (int) Math.floor(Math.random()*(12)+1),
+                                2021));
+            }
+
             bf.close();
             archV.cerrar();
 
@@ -148,23 +133,24 @@ public class Informe {
             System.out.println(e.getMessage());
         }
         System.out.println("Informe generado Exitosamente");
+
     }
 
 
-    private String splitLn(String line){
-
+    private String split(String line){
         String[] parts = line.split(";");
         return parts[0];
     }
 
     private String[] splitDestino(String line){
-        return line.split(";");
+        String[] parts = line.split(";");
+        return parts;
     }
 
     private int[] splitCotizacion(String line){
         int[] parts = new int[2];
         String[] parts2 = line.split(";");
-        parts[0] = Integer.parseInt(parts2[0]); //Separamos el mes del costo
+        parts[0] = Integer.parseInt(parts2[0]);
         parts[1] = Integer.parseInt(parts2[1]);
         return parts;
     }

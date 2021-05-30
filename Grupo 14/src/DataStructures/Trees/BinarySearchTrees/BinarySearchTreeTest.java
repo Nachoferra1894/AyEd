@@ -11,7 +11,7 @@ class BinarySearchTreeTest {
     //Genome Simulation contains the use of a Genome Binary Tree
 
     @Test
-    void getMaxAndGetMin() throws EmptyTreeException, ElementNotInTreeException { //Basic test for an integer tree. Genome Simulation contains the use of a Genome Binary Tree
+    void getMaxAndGetMin() throws EmptyTreeException, ElementNotInTreeException { //Basic SimulacionArchivos for an integer tree. Genome Simulation contains the use of a Genome Binary Tree
         BinarySearchTree<Integer> anIntTree = new BinarySearchTree<>();
         anIntTree.insert(14);
         anIntTree.insert(12);

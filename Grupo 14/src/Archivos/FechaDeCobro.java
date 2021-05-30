@@ -1,12 +1,12 @@
 package Archivos;
 
 public class FechaDeCobro {
-    int dia,mes,anio;
+    int dia,mes,año;
 
-    public FechaDeCobro(int dia, int mes, int anio) {
+    public FechaDeCobro(int dia, int mes, int año) {
         this.dia = dia;
         this.mes = mes;
-        this.anio = anio;
+        this.año = año;
     }
 
     public int getDia() {
@@ -25,11 +25,11 @@ public class FechaDeCobro {
         this.mes = mes;
     }
 
-    public int getnio() {
-        return anio;
+    public int getAño() {
+        return año;
     }
 
-    public void setAnio(int anio) {
-        this.anio = anio;
+    public void setAño(int año) {
+        this.año = año;
     }
 }
